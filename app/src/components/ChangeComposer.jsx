@@ -185,7 +185,16 @@ function EditCueForm({ cue, onCancel, onSubmit }) {
     const startMinute = parseTimeToMinute(hour, minute, period);
     const durationMinutes = Number(duration);
     if (startMinute === null || !Number.isInteger(durationMinutes) || durationMinutes <= 0) return;
-    onSubmit({ startMinute, durationMinutes });
+    const patch = {};
+    // Only pin an explicit start time if the coordinator actually changed it here — otherwise
+    // this cue stays eligible for automatic propagation from its dependencies (PRD §6.2).
+    if (startMinute !== cue.startMinute) patch.startMinute = startMinute;
+    if (durationMinutes !== cue.durationMinutes) patch.durationMinutes = durationMinutes;
+    if (Object.keys(patch).length === 0) {
+      onCancel();
+      return;
+    }
+    onSubmit(patch);
   }
 
   return (

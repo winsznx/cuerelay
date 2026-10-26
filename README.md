@@ -3,7 +3,7 @@
 Plans change. Everyone stays in sync.
 
 CueRelay is an event-run-of-show app for wedding and event coordinators. A coordinator
-changes one cue's time, sees the deterministic downstream impact and any conflicts before
+changes one cue's time, sees the exact downstream impact and any conflicts before
 anything is shared, approves a revision, and publishes it — which notifies only the
 vendors actually affected and tracks their acknowledgement.
 
@@ -15,7 +15,7 @@ vendors actually affected and tracks their acknowledgement.
 Change a cue → preview the ripple → resolve conflicts → publish → notify affected
 vendors → track acknowledgement.
 
-The scheduling engine is deterministic and independently tested: FINISH_TO_START /
+The scheduling engine follows fixed rules and is independently tested: FINISH_TO_START /
 START_TO_START dependencies, fixed vs. flexible cues, hard stops, exclusive-resource
 overlap, and DAG cycle detection. Publishing is idempotent and protected against stale
 proposals via an atomic compare-and-set on the event's published-revision pointer.

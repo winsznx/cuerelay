@@ -8,7 +8,7 @@ import { TimePill } from '@/components/TimePill';
 import { AppWindow } from '@/components/AppWindow';
 
 const WHY = [
-  { icon: ShieldCheck, title: 'Deterministic, not guessed', body: 'The same FINISH_TO_START / START_TO_START graph logic runs every time. No AI invents a new time for your ceremony.' },
+  { icon: ShieldCheck, title: 'Calculated, not guessed', body: 'The same fixed rules run every time. Nothing invents a new time for your ceremony on its own.' },
   { icon: Lock, title: 'Server-scoped, not UI-hidden', body: "A vendor's call sheet is built server-side from their actual assignments. Nothing they shouldn't see ever reaches their browser." },
   { icon: Radio, title: 'Honest status, always', body: 'A sent email is never shown as "delivered." An email is never shown as "acknowledged." Those are three different, separately tracked facts.' },
 ];
@@ -41,7 +41,7 @@ export function Landing() {
       {/* 2. Hero + above-fold product window */}
       <section className="mx-auto max-w-5xl px-6 pb-20 pt-12 text-center md:pt-20">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-cue-border bg-surface px-3 py-1 text-xs text-muted">
-          <span className="h-1.5 w-1.5 rounded-full bg-success" /> Deterministic scheduling engine · Base44
+          <span className="h-1.5 w-1.5 rounded-full bg-success" /> A fixed, repeatable scheduling engine · Base44
         </span>
         <h1 className="mt-5 font-display text-4xl leading-[1.1] tracking-tight text-ink md:text-6xl">
           Plans change.
