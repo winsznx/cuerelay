@@ -1,0 +1,24 @@
+// One per eligible participant/channel per batch. No invented delivery receipts (PRD §7, FR-047).
+// email_reminder jobs (PRD §9.3) have no batchId — they're not tied to a publish, just a scheduled sweep.
+{
+  "name": "NotificationJob",
+  "type": "object",
+  "properties": {
+    "batchId": { "type": "string" },
+    "revisionId": { "type": "string" },
+    "vendorParticipantId": { "type": "string" },
+    "channel": { "type": "string", "enum": ["email", "in_app", "email_reminder"] },
+    "idempotencyKey": { "type": "string", "description": "revisionId:vendorParticipantId:channel, or includes a time-window bucket for reminders" },
+    "status": { "type": "string", "enum": ["pending", "sent", "failed"], "default": "pending" },
+    "attempts": { "type": "integer", "default": 0, "minimum": 0 },
+    "lastError": { "type": "string" },
+    "sentAt": { "type": "string", "format": "date-time" }
+  },
+  "required": ["revisionId", "vendorParticipantId", "channel", "idempotencyKey", "status"],
+  "rls": {
+    "create": false,
+    "read": { "created_by_id": "{{user.id}}" },
+    "update": false,
+    "delete": false
+  }
+}

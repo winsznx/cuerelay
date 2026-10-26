@@ -1,0 +1,26 @@
+// The working editable timeline. Not the source of truth once a revision is published (PRD §7).
+{
+  "name": "Cue",
+  "type": "object",
+  "properties": {
+    "eventId": { "type": "string" },
+    "title": { "type": "string", "minLength": 1 },
+    "startMinute": { "type": "integer", "minimum": 0, "maximum": 2879 },
+    "durationMinutes": { "type": "integer", "minimum": 1 },
+    "mode": { "type": "string", "enum": ["FIXED", "FLEXIBLE"], "default": "FLEXIBLE" },
+    "latestEndMinute": { "type": "integer", "minimum": 0, "maximum": 2879 },
+    "exclusiveResourceId": { "type": "string" },
+    "location": { "type": "string" },
+    "notes": { "type": "string" },
+    "shareWithAllVendors": { "type": "boolean", "default": false },
+    "sortOrder": { "type": "integer", "default": 0 },
+    "archived": { "type": "boolean", "default": false }
+  },
+  "required": ["eventId", "title", "startMinute", "durationMinutes"],
+  "rls": {
+    "create": false,
+    "read": { "created_by_id": "{{user.id}}" },
+    "update": false,
+    "delete": false
+  }
+}

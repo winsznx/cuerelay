@@ -1,0 +1,18 @@
+// Explicit organisation-level membership. No implicit access by email alone (PRD §3.1).
+{
+  "name": "OrganisationMember",
+  "type": "object",
+  "properties": {
+    "organisationId": { "type": "string" },
+    "userId": { "type": "string" },
+    "role": { "type": "string", "enum": ["owner", "collaborator"] },
+    "status": { "type": "string", "enum": ["active", "pending"], "default": "pending" }
+  },
+  "required": ["organisationId", "userId", "role"],
+  "rls": {
+    "create": false,
+    "read": { "created_by_id": "{{user.id}}" },
+    "update": false,
+    "delete": false
+  }
+}

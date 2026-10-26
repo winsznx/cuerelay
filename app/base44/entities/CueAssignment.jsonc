@@ -1,0 +1,18 @@
+// Scopes which cues a vendor's call sheet includes (PRD §7).
+{
+  "name": "CueAssignment",
+  "type": "object",
+  "properties": {
+    "eventId": { "type": "string" },
+    "cueId": { "type": "string" },
+    "vendorParticipantId": { "type": "string" },
+    "notes": { "type": "string" }
+  },
+  "required": ["eventId", "cueId", "vendorParticipantId"],
+  "rls": {
+    "create": false,
+    "read": { "created_by_id": "{{user.id}}" },
+    "update": false,
+    "delete": false
+  }
+}

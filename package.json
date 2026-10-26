@@ -1,0 +1,10 @@
+{
+  "name": "cuerelay",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test:engine": "npm run test --workspace=@cuerelay/scheduling-engine"
+  }
+}

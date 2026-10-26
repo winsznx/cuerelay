@@ -1,0 +1,23 @@
+// A signed-in event participant. Access is granted only through invitation/acceptance,
+// never from a claimed email string alone (PRD §3.1, FR-041).
+{
+  "name": "VendorParticipant",
+  "type": "object",
+  "properties": {
+    "eventId": { "type": "string" },
+    "userId": { "type": "string", "description": "Set once the invited person signs in and accepts" },
+    "displayName": { "type": "string", "minLength": 1 },
+    "roleLabel": { "type": "string" },
+    "email": { "type": "string", "format": "email" },
+    "status": { "type": "string", "enum": ["invited", "accepted", "declined"], "default": "invited" },
+    "invitedAt": { "type": "string", "format": "date-time" },
+    "acceptedAt": { "type": "string", "format": "date-time" }
+  },
+  "required": ["eventId", "displayName", "email", "status"],
+  "rls": {
+    "create": false,
+    "read": { "created_by_id": "{{user.id}}" },
+    "update": false,
+    "delete": false
+  }
+}

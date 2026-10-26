@@ -1,0 +1,26 @@
+// An event's identity, venue and published-revision pointer (PRD §7).
+// currentPublishedRevisionId is never client-editable directly — only publishRevision() may set it.
+{
+  "name": "Event",
+  "type": "object",
+  "properties": {
+    "organisationId": { "type": "string" },
+    "ownerUserId": { "type": "string" },
+    "name": { "type": "string", "minLength": 1 },
+    "eventDateLocal": { "type": "string", "format": "date", "description": "Event date, YYYY-MM-DD, in the event's own timezone" },
+    "timezone": { "type": "string", "description": "IANA timezone id, e.g. America/New_York" },
+    "venueName": { "type": "string" },
+    "hardStopMinute": { "type": "integer", "minimum": 0, "maximum": 2879 },
+    "currentPublishedRevisionId": { "type": "string" },
+    "versionCounter": { "type": "integer", "default": 0, "minimum": 0 },
+    "status": { "type": "string", "enum": ["draft", "published", "archived"], "default": "draft" },
+    "notes": { "type": "string" }
+  },
+  "required": ["organisationId", "ownerUserId", "name", "eventDateLocal", "timezone", "hardStopMinute"],
+  "rls": {
+    "create": false,
+    "read": { "created_by_id": "{{user.id}}" },
+    "update": false,
+    "delete": false
+  }
+}

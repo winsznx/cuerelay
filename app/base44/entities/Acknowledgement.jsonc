@@ -1,0 +1,18 @@
+// Unique by (revisionId, vendorParticipantId); repeated clicks are idempotent (PRD §7, FR-045).
+{
+  "name": "Acknowledgement",
+  "type": "object",
+  "properties": {
+    "eventId": { "type": "string" },
+    "revisionId": { "type": "string" },
+    "vendorParticipantId": { "type": "string" },
+    "acknowledgedAt": { "type": "string", "format": "date-time" }
+  },
+  "required": ["eventId", "revisionId", "vendorParticipantId", "acknowledgedAt"],
+  "rls": {
+    "create": false,
+    "read": { "created_by_id": "{{user.id}}" },
+    "update": false,
+    "delete": false
+  }
+}

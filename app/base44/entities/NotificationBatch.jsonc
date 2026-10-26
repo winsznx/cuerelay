@@ -1,0 +1,19 @@
+// Created once per published revision; its creation is the sole Workflow trigger (PRD §9.1).
+{
+  "name": "NotificationBatch",
+  "type": "object",
+  "properties": {
+    "eventId": { "type": "string" },
+    "revisionId": { "type": "string" },
+    "status": { "type": "string", "enum": ["queued", "processing", "sent", "partial", "failed"], "default": "queued" },
+    "idempotencyKey": { "type": "string" },
+    "finishedAt": { "type": "string", "format": "date-time" }
+  },
+  "required": ["eventId", "revisionId", "status", "idempotencyKey"],
+  "rls": {
+    "create": false,
+    "read": { "created_by_id": "{{user.id}}" },
+    "update": false,
+    "delete": false
+  }
+}

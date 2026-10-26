@@ -1,0 +1,20 @@
+// A FINISH_TO_START or START_TO_START edge between two cues in the same event (PRD §6/§7).
+// DAG-validated on write by saveDependency(), never by client-side-only checks.
+{
+  "name": "CueDependency",
+  "type": "object",
+  "properties": {
+    "eventId": { "type": "string" },
+    "predecessorCueId": { "type": "string" },
+    "successorCueId": { "type": "string" },
+    "type": { "type": "string", "enum": ["FINISH_TO_START", "START_TO_START"] },
+    "offsetMinutes": { "type": "integer", "minimum": 0 }
+  },
+  "required": ["eventId", "predecessorCueId", "successorCueId", "type", "offsetMinutes"],
+  "rls": {
+    "create": false,
+    "read": { "created_by_id": "{{user.id}}" },
+    "update": false,
+    "delete": false
+  }
+}

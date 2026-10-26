@@ -1,0 +1,21 @@
+// Human-readable chronological history of actions on an event (PRD §7).
+{
+  "name": "EventAudit",
+  "type": "object",
+  "properties": {
+    "eventId": { "type": "string" },
+    "actorUserId": { "type": "string" },
+    "action": { "type": "string" },
+    "targetId": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "summary": { "type": "string" },
+    "metadataJson": { "type": "string" }
+  },
+  "required": ["eventId", "actorUserId", "action", "timestamp", "summary"],
+  "rls": {
+    "create": false,
+    "read": { "created_by_id": "{{user.id}}" },
+    "update": false,
+    "delete": false
+  }
+}

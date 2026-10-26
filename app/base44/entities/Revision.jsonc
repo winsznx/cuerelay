@@ -1,0 +1,32 @@
+// Immutable snapshot after publication (PRD §7, §7.2). Never rewritten; restoring an old
+// revision creates a brand new one. *Json fields hold JSON.stringify'd payloads.
+{
+  "name": "Revision",
+  "type": "object",
+  "properties": {
+    "eventId": { "type": "string" },
+    "number": { "type": "integer", "minimum": 1 },
+    "baseRevisionId": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["PROPOSED", "BLOCKED", "PREPARING", "PUBLISHED", "FAILED"],
+      "default": "PROPOSED"
+    },
+    "fullSnapshotJson": { "type": "string", "description": "Serialized {cues, dependencies, hardStopMinute}" },
+    "changedCueIdsJson": { "type": "string" },
+    "affectedParticipantIdsJson": { "type": "string" },
+    "conflictsJson": { "type": "string" },
+    "changeReason": { "type": "string" },
+    "approvedByUserId": { "type": "string" },
+    "approvedAt": { "type": "string", "format": "date-time" },
+    "publishedAt": { "type": "string", "format": "date-time" },
+    "idempotencyKey": { "type": "string" }
+  },
+  "required": ["eventId", "number", "status", "fullSnapshotJson"],
+  "rls": {
+    "create": false,
+    "read": { "created_by_id": "{{user.id}}" },
+    "update": false,
+    "delete": false
+  }
+}

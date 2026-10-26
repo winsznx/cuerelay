@@ -1,0 +1,8 @@
+internal/
+.claude/
+.DS_Store
+node_modules/
+dist/
+.env
+.env.local
+.base44/

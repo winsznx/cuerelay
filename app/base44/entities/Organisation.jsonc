@@ -1,0 +1,18 @@
+// A coordinator's organisation. One owner per organisation in MVP (PRD §7).
+{
+  "name": "Organisation",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string", "minLength": 1 },
+    "ownerUserId": { "type": "string", "description": "Base44 user id of the owning coordinator" },
+    "brandAccent": { "type": "string", "description": "Optional accent colour override" }
+  },
+  "required": ["name", "ownerUserId"],
+  // All writes go through backend functions (asServiceRole); direct entity access is owner-read-only.
+  "rls": {
+    "create": false,
+    "read": { "created_by_id": "{{user.id}}" },
+    "update": false,
+    "delete": false
+  }
+}
