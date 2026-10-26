@@ -1,5 +1,6 @@
 internal/
 .claude/
+cuerelay-demo-video/
 .DS_Store
 node_modules/
 dist/
